@@ -1,62 +1,48 @@
 #!/usr/bin/env python3
-"""A news summary generator that writes a 22-story, 1,997-character summary
-of global geopolitical and financial updates to the designated bounty output directory.
-"""
+"""Generate news summary entry for make.fun bounty news-summary-01."""
 
 import os
 from pathlib import Path
 
-# 22 stories, 1,997 chars — each bullet names its source outlet.
-NEWS = """**Iran (Reuters):** Oil rose; Iran said no uranium would leave; 37 ships hit.
+# Sources: Reuters, Al Jazeera, Deutsche Welle, CNN, AP, NPR
+SUMMARY = """**Iran (Reuters):** Oil rose 1% after Iran said no enriched uranium would leave; 37 ships attacked in October, two tankers mined.
 
-**Ukraine (Reuters):** Russia, Ukraine agreed a prisoner swap after talks.
+**Ukraine (Reuters):** Russia and Ukraine agreed to a major prisoner exchange after US-mediated talks in Abu Dhabi.
 
-**Ebola (Al Jazeera):** 11,042 cases, 5,387 dead; Bundibugyo strain, deadliest outbreak.
+**DRC Ebola (Al Jazeera):** 11,042 confirmed, 5,387 dead — from the Bundibugyo strain in eight provinces, the DRC's deadliest outbreak.
 
-**Kenya (Reuters):** Last Ebola patient discharged, starting a 42-day countdown.
+**Kenya (Reuters):** Kenya discharged its last Ebola patient, starting a 42-day countdown to disease-free status.
 
-**COP31 (Al Jazeera):** Guterres: climate crisis "outrunning us" after record emissions.
+**COP31 (Al Jazeera):** UN chief Guterres told leaders the climate crisis is "outrunning us" after record 2025 emissions.
 
-**Israel (DW):** Knesset met after Oct 27 vote; Netanyahu 53, Eisenkot 48.
+**Israel (Deutsche Welle):** The Knesset met after the October 27 vote; Netanyahu's bloc holds 53 seats, Eisenkot's 48.
 
-**Gaza (Al Jazeera):** Strikes hit a tent camp, killing five, as UN appealed for tents.
+**Gaza (Al Jazeera):** Israeli strikes hit a tent camp in Gaza, killing five, as the UN appealed for tents amid floods.
 
-**Spain (Reuters):** 4m workers joined Spain's first general strike in 14 years.
+**Spain (Reuters):** 4m workers joined Spain's first general strike in 14 years over housing, before the November 29 election.
 
-**Spy arrest (CNN):** 41-year-old soldier arrested near Gloucester, spying for Russia with NATO.
+**Spy arrest (CNN):** A 41-year-old US soldier arrested near Gloucester on suspicion of spying for Russia, with NATO.
 
-**Yemen (Al Jazeera):** 190 Houthis killed or wounded; WHO counts 1,771 dead.
+**Yemen (Al Jazeera):** Forces said 190 Houthi fighters were killed or wounded in six provinces; the WHO counts 1,771 killed since August.
 
-**Hegseth (Reuters):** House voted 211-204 to send the Hegseth impeachment bid to committee.
+**Hegseth (Reuters):** The House voted 211-204 to send the Hegseth bid to committee, effectively killing it.
 
-**Mississippi (AP):** Colom won the seat as Hyde-Smith conceded, first Democrat win since 1982.
+**Mississippi (AP):** Democrat Scott Colom won the Mississippi Senate seat as Hyde-Smith conceded, the first Democratic win since 1982.
 
-**Iran operatives (NPR):** US indicted 3 Iran-backed operatives behind nearly 20 attacks in Europe, US.
+**Iran operatives (NPR):** US prosecutors indicted three men accused as Iran-backed operatives behind ~20 attacks in Europe and the US.
 
-**Wall Street (AP):** Stocks rebounded as CoreWeave jumped 24.7%; S&P up 1.3%, STOXX 600 record.
+**Wall Street (AP):** Stocks rebounded as CoreWeave jumped 24.7%; the S&P 500 rose 1.3% and STOXX 600 hit a record.
 
-**Nvidia (Reuters):** Huang engulfed in chip-spy scandal as affair helped ship $7.5bn chips to China.
+**Nvidia (Reuters):** Huang was engulfed in a chip-spy scandal as his affair helped ship $7.5bn in chips to China; the board opened a probe.
 
-**China-US (Reuters):** Wang Yi called Rubio talks "positive and constructive" before APEC in Shenzhen.
-
-**Indonesia (Reuters):** MSCI to drop Barito Pacific as Jakarta fell over 40% this year, worst.
-
-**Fed (Reuters):** Waller put 50bp Dec hike on table, lifting dollar to 19-month high.
-
-**Sudan (G7):** G7 demanded end to outside support for Sudan's forces as famine risk grows.
-
-**Italy (Reuters):** Bomb threats hit 6,300 schools, prompting new security measures.
-
-**EU tech (Reuters):** EU proposed Digital Fairness Act, fining Big Tech 6% over dark patterns.
-
-**Moscow (AP):** Envoys Kushner, Witkoff head to Moscow to meet Putin after Abu Dhabi talks."""
+**Fed (Reuters):** Waller put a 50bp Dec hike on the table, lifting the dollar to a 19-month high."""
 
 
 def main():
-    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "output")
-    p = Path(out_dir) / "entry.txt"
-    p.parent.mkdir(parents=True, exist_ok=True)
-    p.write_text(NEWS, encoding="utf-8", newline="\n")
+    output_dir = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "output"))
+    output_dir.mkdir(parents=True, exist_ok=True)
+    entry_path = output_dir / "entry.txt"
+    entry_path.write_text(SUMMARY, encoding="utf-8", newline="\n")
 
 
 if __name__ == "__main__":
