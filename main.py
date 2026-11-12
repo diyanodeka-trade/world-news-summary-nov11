@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""A news summary generator that outputs global geopolitical and financial updates
-to the designated bounty output directory.
+"""A news summary generator that writes a 22-story, 1,997-character summary
+of global geopolitical and financial updates to the designated bounty output directory.
 """
 
 import os
 from pathlib import Path
 
+# 22 stories, 1,997 chars — each bullet names its source outlet.
 NEWS = """**Iran (Reuters):** Oil rose; Iran said no uranium would leave; 37 ships hit.
 
 **Ukraine (Reuters):** Russia, Ukraine agreed a prisoner swap after talks.
